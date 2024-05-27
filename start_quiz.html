@@ -9,7 +9,7 @@
     <script src="quiz.js"></script>
 
     <script>
-		fetch('polls.json')
+		fetch('data/polls.json')
 		  .then(response => response.json())
 		  .then(data => {
 			// Use the data object to initialize your poll elements
@@ -23,25 +23,21 @@
 		var score = 0;		
 
         
-		function updatePollData() {
-		  
-		  fetch('polls.json', {
-			method: 'POST',
-			headers: {
-			  'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(polls_answers)
-		  })
-		  .then(response => {
-			if (response.ok) {
-			  console.log('Poll data updated successfully');
-			} else {
-			  console.error('Error updating poll data:', response.status);
-			}
-		  })
-		  .catch(error => {
-			console.error('Error updating poll data:', error);
-		  });
+		function updatePoll() {
+			fetch('/.netlify/functions/updatePoll', {
+				method: 'POST',
+				body: JSON.stringify(polls_answers),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			})
+			.then(response => response.json())
+			.then(data => {
+				console.log('Success:', data);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
 		}
 		
 		function executeStep(){			
@@ -97,7 +93,7 @@
 				html.innerHTML = newhtml;
 				next = document.getElementById("next_container");		
 				next.innerHTML = '<a href="video.html"><img src="buttons/next_button_blue.png" id="next" class="next_button"></a>';
-				updatePollData();
+				updatePoll();
 				return;				
 			}			
             if (step.element == 'quiz'){
