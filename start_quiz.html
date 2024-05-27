@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ctrl.alt.img</title>
+	
+	<link rel="stylesheet" href="main.css">
+
+    <script src="quiz.js"></script>
+
+    <script>
+		fetch('polls.json')
+		  .then(response => response.json())
+		  .then(data => {
+			// Use the data object to initialize your poll elements
+			polls_answers = data;
+		  })
+		  .catch(error => {
+			console.error('Error reading poll data:', error);
+		  });
+	
+        var quizStep = 0;
+		var score = 0;		
+
+        
+		function updatePollData() {
+		  
+		  fetch('polls.json', {
+			method: 'POST',
+			headers: {
+			  'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(polls_answers)
+		  })
+		  .then(response => {
+			if (response.ok) {
+			  console.log('Poll data updated successfully');
+			} else {
+			  console.error('Error updating poll data:', response.status);
+			}
+		  })
+		  .catch(error => {
+			console.error('Error updating poll data:', error);
+		  });
+		}
+		
+		function executeStep(){			
+            render(quizLogic[quizStep]);
+        };
+		
+		function answer(reply){	
+			var correct = false;
+			html = document.getElementById("container");
+			if (reply == quizLogic[quizStep].correctAnswer){
+				score = score + 1;				
+				correct = true;
+			}
+			quizStep = quizStep + 1;
+			
+			if (correct){				
+				newhtml = "<p class='blue'>You're right!</p><p><img class='ai_image' src='quiz_images/"+quizLogic[quizStep-1].image+"'></p><p>"+quizLogic[quizStep-1].options[quizLogic[quizStep-1].correctAnswer]+"</p>";
+			}
+			else {
+				newhtml = "<p class='blue'>Bummer</p><p><img class='ai_image' src='quiz_images/"+quizLogic[quizStep-1].image+"'></p><p>"+quizLogic[quizStep-1].options[quizLogic[quizStep-1].correctAnswer]+"</p>";			
+			}
+			html.innerHTML = newhtml;
+			next = document.getElementById("next_container");
+			next.innerHTML = '<img src="buttons/next_button.png" id="next" class="next_button" onclick="executeStep();">';
+			console.log("Score:"+score);			
+		};
+		
+		function answer_poll(reply){	
+			html = document.getElementById("container");			
+			polls_answers[quizStep][reply] = polls_answers[quizStep][reply]+1;			
+			
+			console.log(polls_answers[quizStep]);
+									
+			option_0 = quizLogic[quizStep].options[0];
+			option_1 = quizLogic[quizStep].options[1];
+			option_2 = quizLogic[quizStep].options[2];
+			
+			newhtml = "<p>See what others think...</p><p>"+option_0+":"+polls_answers[quizStep][0]+"</p><p>"+option_1+":"+polls_answers[quizStep][1]+"</p><p>"+option_2+":"+polls_answers[quizStep][2]+"</p>";
+			
+			html.innerHTML = newhtml;
+			next = document.getElementById("next_container");			
+			next.innerHTML = '<img src="buttons/next_button.png" id="next" class="next_button" onclick="executeStep();">';
+			quizStep = quizStep + 1;				
+		};
+
+        function render(step){
+			
+			if (quizStep == 7){
+				html = document.getElementById("container");
+				console.log(quizStep);
+				
+				newhtml = "<img width=200px src='images/your_score.png'><p>"+score+"/4</p><img width=200px src='images/thanks_visit_booth.png'>";				
+				html.innerHTML = newhtml;
+				next = document.getElementById("next_container");
+				//next.innerHTML = '<a id="next" href="index.html">Next</a>';
+				next.innerHTML = '<img src="buttons/next_button_blue.png" id="next" class="next_button" onclick="">';
+				updatePollData();
+				return;				
+			}			
+            if (step.element == 'quiz'){
+                console.log(step);
+				html = document.getElementById("container");
+                title = step.question;
+				
+                option_0 = step.options[0];
+                option_1 = step.options[1];
+                option_2 = step.options[2];
+                
+				image = step.image;
+                newhtml = "<p class='blue'>"+title+"</p><p onclick='answer(0);'>"+option_0+"</p><p onclick='answer(1);'>"+option_1+"</p><p onclick='answer(2);'>"+option_2+"</p><p><img class='ai_image' src='quiz_images/"+step.image+"'></p>";
+                html.innerHTML = newhtml;
+				next = document.getElementById("next");
+				next.remove();
+            }
+            if (step.element == 'poll'){
+				html = document.getElementById("container");
+                title = step.question;
+				
+                option_0 = step.options[0];
+                option_1 = step.options[1];
+                option_2 = step.options[2];
+                
+				image = step.image;
+                newhtml = "<p class='blue'>"+title+"</p><p onclick='answer_poll(0);'>"+option_0+"</p><p onclick='answer_poll(1);'>"+option_1+"</p><p onclick='answer_poll(2);'>"+option_2+"</p>";
+                html.innerHTML = newhtml;
+				next = document.getElementById("next");
+				next.remove();
+            }            
+        };
+
+    </script>
+
+</head>
+
+<body>
+
+<header>
+	<div class="header">
+		<a href="index.html"><img class="menu" src="buttons/home_button.png"></a>
+		<a href="start_quiz.html"><img class="menu" src="buttons/quiz_button.png"></a>
+		<a href="video.html"><img class="menu" src="buttons/video_button.png"></a>
+		<a href="about.html"><img class="menu" src="buttons/about_button.png"></a>
+		<a href="#"><img class="menu" src="buttons/ctl.alt.img_button.png"></a>
+	</div>
+</header>
+
+<main>
+    <div id="container">
+        <p>All of these images were generated by AI. Each one was made
+using a different keyword or prompt to achieve the result.</p>
+        <p><img class="ai_image" src="quiz_images/1.png"><img class="ai_image" src="quiz_images/2.png"><img class="ai_image" src="quiz_images/3.png"><img class="ai_image" src="quiz_images/4.png"></p>
+        <p class="blue">Can you guess the prompt?</p>
+    </div>
+    <p id="next_container"><img src="buttons/next_button.png" id="next" class="next_button" onclick="executeStep();"></p>
+</main>
+
+<footer>
+	<img width="100px" src="logo/foam.png"><img width="100px" src="logo/affect.png">
+</footer>
+
+
+</body>
+</html>

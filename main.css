@@ -1,0 +1,30 @@
+.header {
+	background-color: #0074FF;
+}
+
+.menu {
+	width: 100px;
+}
+
+.next_button {
+	width: 100px;
+}
+
+.ready_to_go {
+	width: 500px;
+}
+
+.ai_image {
+	width: 300px;
+	height: 300px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.blue {
+	color: #0074FF;
+}
+
+.grey {
+	color: #D0D2D3;
+}
