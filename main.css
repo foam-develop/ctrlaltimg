@@ -1,8 +1,24 @@
+@font-face {
+    font-family: 'NewEdge666-Regular';
+    src: url('fonts/NewEdge666-Regular.woff2') format('woff2'),         
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Apply the font to elements */
+html {
+    font-family: 'NewEdge666-Regular', sans-serif;
+}
+
 .header {
 	background-color: #0074FF;
 }
 
 .menu {
+	width: 100px;
+}
+
+.start {
 	width: 100px;
 }
 
