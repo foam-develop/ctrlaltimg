@@ -54,10 +54,10 @@
 			quizStep = quizStep + 1;
 			
 			if (correct){				
-				newhtml = "<p class='blue'>You're right!</p><p><img class='ai_image' src='quiz_images/"+quizLogic[quizStep-1].image+"'></p><p>"+quizLogic[quizStep-1].options[quizLogic[quizStep-1].correctAnswer]+"</p>";
+				newhtml = "<p class='blue main-text'>You're right!</p><p class='image-row'><img class='ai_image' src='quiz_images/"+quizLogic[quizStep-1].image+"'></p><p class='outlined_answer'>"+quizLogic[quizStep-1].options[quizLogic[quizStep-1].correctAnswer]+"</p>";
 			}
 			else {
-				newhtml = "<p class='blue'>Bummer</p><p><img class='ai_image' src='quiz_images/"+quizLogic[quizStep-1].image+"'></p><p>"+quizLogic[quizStep-1].options[quizLogic[quizStep-1].correctAnswer]+"</p>";			
+				newhtml = "<p class='blue main-text'>Bummer</p><p class='image-row'><img class='ai_image' src='quiz_images/"+quizLogic[quizStep-1].image+"'></p><p class='outlined_answer'>"+quizLogic[quizStep-1].options[quizLogic[quizStep-1].correctAnswer]+"</p>";			
 			}
 			html.innerHTML = newhtml;
 			next = document.getElementById("next_container");
@@ -75,7 +75,14 @@
 			option_1 = quizLogic[quizStep].options[1];
 			option_2 = quizLogic[quizStep].options[2];
 			
-			newhtml = "<p>See what others think...</p><p>"+option_0+":"+polls_answers[quizStep][0]+"</p><p>"+option_1+":"+polls_answers[quizStep][1]+"</p><p>"+option_2+":"+polls_answers[quizStep][2]+"</p>";
+			total = polls_answers[quizStep][0]+polls_answers[quizStep][1]+polls_answers[quizStep][2];
+			perc_0 = Math.round(polls_answers[quizStep][0]/total * 100);
+			perc_1 = Math.round(polls_answers[quizStep][1]/total * 100);
+			perc_2 = Math.round(polls_answers[quizStep][2]/total * 100);
+			console.log(perc_0);
+			
+			//newhtml = "<p class='blue main-text'>See what others think...</p><div class='content-wrapper'><div class='text-container'><p class='outlined'>"+option_0+":"+polls_answers[quizStep][0]+"</p><p class='outlined'>"+option_1+":"+polls_answers[quizStep][1]+"</p><p class='outlined'>"+option_2+":"+polls_answers[quizStep][2]+"</p></div></div>";
+			newhtml = "<p class='blue main-text'>See what others think...</p><div class='content-wrapper'><div class='text-container'><div class='percentage-bar'><div class='filled-bar' style='width: "+perc_0+"%;'><p>"+option_0+"</p></div></div><div class='percentage-bar'><p>"+option_1+"</p><div class='filled-bar' style='width: "+perc_1+"%;'></div></div><div class='percentage-bar'><p>"+option_2+"</p><div class='filled-bar' style='width: "+perc_2+"%;'></div></div></div></div>";			    
 			
 			html.innerHTML = newhtml;
 			next = document.getElementById("next_container");			
@@ -96,8 +103,7 @@
 				updatePoll();
 				return;				
 			}			
-            if (step.element == 'quiz'){
-                console.log(step);
+            if (step.element == 'quiz'){                
 				html = document.getElementById("container");
                 title = step.question;
 				
@@ -106,7 +112,7 @@
                 option_2 = step.options[2];
                 
 				image = step.image;
-                newhtml = "<p class='blue'>"+title+"</p><p onclick='answer(0);'>"+option_0+"</p><p onclick='answer(1);'>"+option_1+"</p><p onclick='answer(2);'>"+option_2+"</p><p><img class='ai_image' src='quiz_images/"+step.image+"'></p>";
+                newhtml = "<p class='blue main-text'>"+title+"</p><div class='content-wrapper'><div class='text-container'><p class='outlined' onclick='answer(0);'>"+option_0+"<br /></p><p class='outlined' onclick='answer(1);'>"+option_1+"<br /></p><p class='outlined' onclick='answer(2);'>"+option_2+"<br /></p></div><div class='image-container>'<p><img class='ai_image' src='quiz_images/"+step.image+"'></p></div></div>";
                 html.innerHTML = newhtml;
 				next = document.getElementById("next");
 				next.remove();
@@ -120,7 +126,7 @@
                 option_2 = step.options[2];
                 
 				image = step.image;
-                newhtml = "<p class='blue'>"+title+"</p><p onclick='answer_poll(0);'>"+option_0+"</p><p onclick='answer_poll(1);'>"+option_1+"</p><p onclick='answer_poll(2);'>"+option_2+"</p>";
+                newhtml = "<p class='blue main-text'>"+title+"</p><div class='content-wrapper'><div class='text-container'><p class='outlined' onclick='answer_poll(0);'>"+option_0+"</p><p class='outlined' onclick='answer_poll(1);'>"+option_1+"</p><p class='outlined' onclick='answer_poll(2);'>"+option_2+"</p></div></div>";
                 html.innerHTML = newhtml;
 				next = document.getElementById("next");
 				next.remove();
@@ -135,26 +141,41 @@
 
 <header>
 	<div class="header">
-		<a href="index.html"><img class="menu" src="buttons/home_button.png"></a>
-		<a href="start_quiz.html"><img class="menu" src="buttons/quiz_button.png"></a>
-		<a href="video.html"><img class="menu" src="buttons/video_button.png"></a>
-		<a href="about.html"><img class="menu" src="buttons/about_button.png"></a>
-		<a href="#"><img class="menu" src="buttons/ctl.alt.img_button.png"></a>
+		<div class="menu-items">
+			<a href="index.html"><img class="menu" src="buttons/home_button.png"></a>
+			<a href="start_quiz.html"><img class="menu" src="buttons/quiz_button.png"></a>
+			<a href="video.html"><img class="menu" src="buttons/video_button.png"></a>
+			<a href="about.html"><img class="menu" src="buttons/about_button.png"></a>
+		</div>
+		<div class="align-right">
+			<a href="#"><img class="menu" src="buttons/ctl.alt.img_button.png"></a>
+		</div>
 	</div>
 </header>
 
 <main>
-    <div id="container">
-        <p>All of these images were generated by AI. Each one was made
-using a different keyword or prompt to achieve the result.</p>
-        <p><img class="ai_image" src="quiz_images/1.png"><img class="ai_image" src="quiz_images/2.png"><img class="ai_image" src="quiz_images/3.png"><img class="ai_image" src="quiz_images/4.png"></p>
-        <p class="blue">Can you guess the prompt?</p>
-    </div>
-    <p id="next_container"><img src="buttons/next_button.png" id="next" class="next_button" onclick="executeStep();"></p>
+	<div id="container">
+		<p class="main-text">All of these images were generated by AI. Each one was made
+                using a different keyword or prompt to achieve the result.</p>
+        <p class="image-row">
+			<img class="ai_image" src="quiz_images/1.png">
+			<img class="ai_image" src="quiz_images/2.png">
+			<img class="ai_image" src="quiz_images/3.png">
+			<img class="ai_image" src="quiz_images/4.png">
+		</p>
+		<p class="blue main-text">Can you guess the prompt?</p>
+		
+		
+	</div>
+	<p id="next_container">
+		<img src="buttons/next_button.png" id="next" class="next_button" onclick="executeStep();">
+	</p>
+    
 </main>
 
 <footer>
-	<img width="100px" src="logo/foam_affectlab.png">
+	<div class="footer"></div>
+	<div class="align-right"><img class="logo" src="logo/foam_affectlab.png"></div>
 </footer>
 
 

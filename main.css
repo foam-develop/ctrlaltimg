@@ -5,30 +5,174 @@
     font-style: normal;
 }
 
-/* Apply the font to elements */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 html {
     font-family: 'NewEdge666-Regular', sans-serif;
 }
 
-.header {
+header {
 	background-color: #0074FF;
+	display: flex;
+    align-items: center;
+}
+
+.header {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 30px;
+	padding-right: 10px;	
+	width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;	
+	box-sizing: border-box;
+}
+
+.menu-items {    
+	display: flex;
+    align-items: center;
+    flex-grow: 1;	
+}
+
+.align-right {    
+	display: flex;
+    align-items: center;
 }
 
 .menu {
 	width: 100px;
+	padding-right: 20px;
+}
+
+.home_header {
+	background: url('images/header_back.png') no-repeat center center;
+    background-size: cover;
+    height: 150px;
+	
+}
+
+.ready_to_go {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	margin-left: 50px;
+	background: url('images/are_you_ready.png') no-repeat center center;
+    background-size: cover;
+    height: 150px;
+	width: 550px;
+}
+
+.about {
+	margin-top: 50px;
+	margin-bottom: 20px;	
+	background: url('buttons/about.png') no-repeat center center;
+    background-size: cover;
+    height: 40px;
+	width: 130px;
+}
+
+.video {
+	margin-top: 50px;
+	margin-bottom: 20px;	
+	background: url('buttons/about.png') no-repeat center center;
+    background-size: cover;
+    height: 40px;
+	width: 130px;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    margin: 20px 0; /* Adjust margin as needed */
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.main_text {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	margin-left: 50px;
+	width: 700px;
+}
+
+.start_button {
+	margin-top: 20px;
 }
 
 .start {
 	width: 100px;
 }
 
+main {
+	min-height: 600px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+#container {
+    text-align: center;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px; /* Adjust spacing between the divs as needed */
+}
+
+.text-container {
+    flex: 1;
+	max-width: 200px;
+}
+
+.image-container {
+    flex: 1;
+    text-align: center;
+}
+
+.image-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.main-text {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+#next_container {
+	margin-top: 30px;
+    text-align: center;
+}
+
 .next_button {
+    cursor: pointer;
 	width: 100px;
 }
 
-.ready_to_go {
-	width: 500px;
-}
+
 
 .ai_image {
 	width: 300px;
@@ -37,10 +181,100 @@ html {
 	margin-right: 10px;
 }
 
+.outlined {    
+	margin-bottom: 25px;
+	border: 3px solid #0074FF; /* Change color and thickness as needed */
+    border-radius: 20px; /* Adjust the radius to achieve the desired roundness */
+    padding: 20px; /* Add padding to create space between the text and the border */
+    display: inline-block; /* Ensure the border wraps tightly around the content */
+	color: #0074FF;	
+	min-width: 200px;
+}
+
+.outlined_answer {    
+	border: 3px solid #0074FF; /* Change color and thickness as needed */
+    border-radius: 20px; /* Adjust the radius to achieve the desired roundness */
+	background-color: #0074FF;
+    padding: 20px; /* Add padding to create space between the text and the border */
+    display: inline-block; /* Ensure the border wraps tightly around the content */
+	color: white;	
+}
+
+.percentage-bar {
+    width: 100%;
+    max-width: 400px; /* Adjust as needed */
+    background-color: #D0D2D3;
+    border: 3px solid #D0D2D3; /* Outline color and thickness */
+    border-radius: 20px; /* Rounded corners */
+    overflow: hidden; /* Ensures rounded corners clip the filled bar */
+    position: relative;    
+    margin: 10px 0; /* Vertical spacing */
+	min-width: 200px;
+	min-height: 64px;
+}
+
+.filled-bar {
+    height: 100%;
+    background-color: #0074FF; /* Filled bar color */
+    border-radius: 10px 0 0 10px; /* Rounded corners for the filled part */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .blue {
 	color: #0074FF;
 }
 
 .grey {
 	color: #D0D2D3;
+}
+
+.logo {
+	width: 200px;	
+}
+
+footer {	
+	display: flex;
+    align-items: center;
+	padding-right: 20px;
+}
+
+.footer {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 30px;
+	padding-right: 10px;	
+	width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;	
+	box-sizing: border-box;
+}
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    header {
+        height: auto;
+        padding: 10px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .menu-items {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .menu {
+        margin: 5px;
+    }
+
+    .align-right {
+        align-self: flex-end;
+    }
 }
