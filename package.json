@@ -1,6 +1,10 @@
 {
   "name": "your-project",
   "version": "1.0.0",
+    "scripts": {
+    "build": "npm run build",
+    "start": "npm start"
+  },
   "dependencies": {
     "fs": "^0.0.1-security",
     "path": "^0.12.7"
