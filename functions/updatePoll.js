@@ -12,7 +12,7 @@ exports.handler = async (event, context) => {
 	
     try {
        
-        const pollData = JSON.parse(fs.readFileSync(pollDataPath, 'utf8'));
+        const pollData = JSON.parse(fs.readFileSync('./data/polls.json', 'utf8'));
         
         const newData = JSON.parse(event.body);
 		// Update poll data with newData
