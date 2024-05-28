@@ -10,7 +10,7 @@ exports.handler = async (event, context) => {
     }
 
     try {
-        const pollDataPath = path.resolve(__dirname, process.env.POLL_DATA_PATH || '../data/data.json');
+        const pollDataPath = path.resolve(__dirname, '/data/data.json');
         const pollData = JSON.parse(fs.readFileSync(pollDataPath, 'utf8'));
         
         const newData = JSON.parse(event.body);
