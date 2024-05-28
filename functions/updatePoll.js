@@ -8,7 +8,7 @@ exports.handler = async (event, context) => {
             body: 'Method Not Allowed'
         };
     }
-	const pollDataPath = path.resolve(__dirname, '../data/polls.json');
+	const pollDataPath = path.resolve(__dirname, '/data/polls.json');
 	
     try {
        
