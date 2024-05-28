@@ -9,7 +9,7 @@
     <script src="quiz.js"></script>
 
     <script>
-		fetch('data/polls.json')
+		/*fetch('https://ctrlaltimg.affectlab.org/polls.json')
 		  .then(response => response.json())
 		  .then(data => {
 			// Use the data object to initialize your poll elements
@@ -17,26 +17,86 @@
 		  })
 		  .catch(error => {
 			console.error('Error reading poll data:', error);
-		  });
+		  });*/
+		  
+		// Fetch the JSON data from the given URL
+        fetch('https://ctrlaltimg.affectlab.org/share_image/polls')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Use the data object to initialize your poll elements
+                //const pollsDiv = document.getElementById('polls');
+				polls_answers = data;
+                //pollsDiv.innerHTML = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                console.error('Error reading poll data:', error);
+            });
 	
         var quizStep = 0;
 		var score = 0;		
 
         
 		function updatePoll() {
-			fetch('/.netlify/functions/updatePoll', {
-				method: 'POST',
-				body: JSON.stringify(polls_answers),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			})
-			.then(response => response.json())
-			.then(data => {
-				console.log('Success:', data);
-			})
-			.catch((error) => {
-				console.error('Error:', error);
+			let jsonString = JSON.stringify(polls_answers);
+
+			// Convert to base64 (optional, as the Python code does)
+			let encodedString = btoa(jsonString);
+
+			// Secret key
+			let secret = 'JDZ7RHqdH*7E2u';
+
+			// Convert secret to Uint8Array
+			let secretBuffer = new TextEncoder().encode(secret);
+
+			// Convert data to Uint8Array
+			let dataBuffer = new TextEncoder().encode(jsonString);
+
+			// Calculate HMAC digest
+			crypto.subtle.importKey(
+				'raw',
+				secretBuffer,
+				{name: 'HMAC', hash: {name: 'SHA-256'}},
+				false,
+				['sign']
+			).then(key => {
+				crypto.subtle.sign(
+					'HMAC',
+					key,
+					dataBuffer
+				).then(signature => {
+					let digest = Array.from(new Uint8Array(signature)).map(byte => {
+						return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+					}).join('');
+
+					// Send the data
+					fetch('https://ctrlaltimg.affectlab.org/share_image/poll', {
+						method: 'POST',
+						body: new URLSearchParams({
+							digest: digest,
+							encoded_string: jsonString
+						}),
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded'
+						}
+					})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Network response was not ok ' + response.statusText);
+						}
+						return response.text();
+					})
+					.then(data => {
+						console.log('Response:', data);
+					})
+					.catch(error => {
+						console.error('Error:', error);
+					});
+				});
 			});
 		}
 		
@@ -54,10 +114,10 @@
 			quizStep = quizStep + 1;
 			
 			if (correct){				
-				newhtml = "<p class='blue main-text'>You're right!</p><p class='image-row'><img class='ai_image' src='quiz_images/"+quizLogic[quizStep-1].image+"'></p><p class='outlined_answer'>"+quizLogic[quizStep-1].options[quizLogic[quizStep-1].correctAnswer]+"</p>";
+				newhtml = "<p class='blue main-text'><b>You're right!</b></p><p class='image-row'><img class='ai_image' src='quiz_images/"+quizLogic[quizStep-1].image+"'></p><p class='outlined_answer'>"+quizLogic[quizStep-1].options[quizLogic[quizStep-1].correctAnswer]+"</p>";
 			}
 			else {
-				newhtml = "<p class='blue main-text'>Bummer</p><p class='image-row'><img class='ai_image' src='quiz_images/"+quizLogic[quizStep-1].image+"'></p><p class='outlined_answer'>"+quizLogic[quizStep-1].options[quizLogic[quizStep-1].correctAnswer]+"</p>";			
+				newhtml = "<p class='blue main-text'><b>Bummer<br />The correct answer was...</b></p><p class='image-row'><img class='ai_image' src='quiz_images/"+quizLogic[quizStep-1].image+"'></p><p class='outlined_answer'>"+quizLogic[quizStep-1].options[quizLogic[quizStep-1].correctAnswer]+"</p>";			
 			}
 			html.innerHTML = newhtml;
 			next = document.getElementById("next_container");
@@ -82,7 +142,7 @@
 			console.log(perc_0);
 			
 			//newhtml = "<p class='blue main-text'>See what others think...</p><div class='content-wrapper'><div class='text-container'><p class='outlined'>"+option_0+":"+polls_answers[quizStep][0]+"</p><p class='outlined'>"+option_1+":"+polls_answers[quizStep][1]+"</p><p class='outlined'>"+option_2+":"+polls_answers[quizStep][2]+"</p></div></div>";
-			newhtml = "<p class='blue main-text'>See what others think...</p><div class='content-wrapper'><div class='text-container'><div class='percentage-bar'><div class='filled-bar' style='width: "+perc_0+"%;'><p>"+option_0+"</p></div></div><div class='percentage-bar'><p>"+option_1+"</p><div class='filled-bar' style='width: "+perc_1+"%;'></div></div><div class='percentage-bar'><p>"+option_2+"</p><div class='filled-bar' style='width: "+perc_2+"%;'></div></div></div></div>";			    
+			newhtml = "<p class='blue main-text'><b>See what others think...</b></p><div class='content-wrapper'><div class='text-container'><div class='percentage-bar'><div class='filled-bar' style='width: "+perc_0+"%;'><p class='pollAnswer'>"+option_0+" "+perc_0+"%</p></div></div><div class='percentage-bar'><p class='pollAnswer'>"+option_1+" "+perc_1+"%</p><div class='filled-bar' style='width: "+perc_1+"%;'></div></div><div class='percentage-bar'><p class='pollAnswer'>"+option_2+" "+perc_2+"%</p><div class='filled-bar' style='width: "+perc_2+"%;'></div></div></div></div>";			    
 			
 			html.innerHTML = newhtml;
 			next = document.getElementById("next_container");			
@@ -93,15 +153,15 @@
         function render(step){
 			
 			if (quizStep == 7){
-				html = document.getElementById("container");
-				console.log(quizStep);
+				html = document.getElementById("container");				
+				main = document.getElementById("main");				
+				main.style.backgroundImage = "url('images/thanks_background.png')";
+				main.style.backgroundRepeat = "no-repeat";
+				main.style.backgroundPosition = "center center";
+				main.style.backgroundSize = "cover";
 				
-				main = document.getElementById("main");
-				main.style.backgroundImage = "url('images/thanks_background.png') no-repeat center center";
-				/*main.style.background-size = "cover;";*/
 				
-				
-				newhtml = "<img width=200px src='images/your_score.png'><p>"+score+"/4</p><img width=200px src='images/thanks_visit_booth.png'>";				
+				newhtml = "<div class='main_text'><img class='score' src='images/your_score.png'><p>"+score+"/4</p><img width=400px src='images/thanks_visit_booth.png'></div>";				
 				html.innerHTML = newhtml;
 				next = document.getElementById("next_container");		
 				next.innerHTML = '<a href="video.html"><img src="buttons/next_button_blue.png" id="next" class="next_button"></a>';
@@ -117,7 +177,7 @@
                 option_2 = step.options[2];
                 
 				image = step.image;
-                newhtml = "<p class='blue main-text'>"+title+"</p><div class='content-wrapper'><div class='text-container'><p class='outlined' onclick='answer(0);'>"+option_0+"<br /></p><p class='outlined' onclick='answer(1);'>"+option_1+"<br /></p><p class='outlined' onclick='answer(2);'>"+option_2+"<br /></p></div><div class='image-container>'<p><img class='ai_image' src='quiz_images/"+step.image+"'></p></div></div>";
+                newhtml = "<p class='blue main-text'><b>"+title+"</b></p><div class='content-wrapper'><div class='text-container'><p class='outlined' onclick='answer(0);'>"+option_0+"<br /></p><p class='outlined' onclick='answer(1);'>"+option_1+"<br /></p><p class='outlined' onclick='answer(2);'>"+option_2+"<br /></p></div><div class='image-container>'<p><img class='ai_image' src='quiz_images/"+step.image+"'></p></div></div>";
                 html.innerHTML = newhtml;
 				next = document.getElementById("next");
 				next.remove();
@@ -131,7 +191,7 @@
                 option_2 = step.options[2];
                 
 				image = step.image;
-                newhtml = "<p class='blue main-text'>"+title+"</p><div class='content-wrapper'><div class='text-container'><p class='outlined' onclick='answer_poll(0);'>"+option_0+"</p><p class='outlined' onclick='answer_poll(1);'>"+option_1+"</p><p class='outlined' onclick='answer_poll(2);'>"+option_2+"</p></div></div>";
+                newhtml = "<p class='blue main-text'><b>"+title+"</b></p><div class='content-wrapper'><div class='text-container'><p class='outlined' onclick='answer_poll(0);'>"+option_0+"</p><p class='outlined' onclick='answer_poll(1);'>"+option_1+"</p><p class='outlined' onclick='answer_poll(2);'>"+option_2+"</p></div></div>";
                 html.innerHTML = newhtml;
 				next = document.getElementById("next");
 				next.remove();
@@ -160,7 +220,7 @@
 
 <main id="main">
 	<div id="container">
-		<p class="main-text light_rounded">All of these images were generated by AI. Each one was made
+		<p class="main-text light_rounded center">All of these images were generated by AI. Each one was made
                 using a different keyword or prompt to achieve the result.</p>
         <p class="image-row">
 			<img class="ai_image" src="quiz_images/1.png">
@@ -168,7 +228,7 @@
 			<img class="ai_image" src="quiz_images/3.png">
 			<img class="ai_image" src="quiz_images/4.png">
 		</p>
-		<p class="blue main-text">Can you guess the prompt?</p>
+		<p class="blue main-text"><b>Can you guess the prompt?</b></p>
 		
 		
 	</div>

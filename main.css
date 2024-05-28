@@ -12,6 +12,12 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'NewEdge666-UltraLightRounded';
+    src: url('fonts/NNewEdge666-UltraLightRounded.woff2') format('woff2'),         
+    font-weight: normal;
+    font-style: normal;
+}
 
 
 * {
@@ -21,7 +27,8 @@
 }
 
 html {
-    font-family: 'NewEdge666-Regular', sans-serif;
+    font-family: 'NewEdge666-UltraLightRounded', sans-serif;
+	font-size: 17px;
 }
 
 header {
@@ -61,7 +68,7 @@ header {
 .home_header {
 	background: url('images/header_back.png') no-repeat center center;
     background-size: cover;
-    height: 150px;
+    height: 270px;
 	
 }
 
@@ -71,8 +78,8 @@ header {
 	margin-left: 50px;
 	background: url('images/are_you_ready.png') no-repeat center center;
     background-size: cover;
-    height: 150px;
-	width: 550px;
+    height: 140px;
+	width: 570px;
 }
 
 .about {
@@ -87,13 +94,16 @@ header {
 .video {
 	margin-top: 50px;
 	margin-bottom: 20px;	
-	background: url('buttons/about.png') no-repeat center center;
+	background: url('buttons/videos.png') no-repeat center center;
     background-size: cover;
-    height: 40px;
-	width: 130px;
+    height: 50px;
+	width: 140px;
 }
 
 .video-container {
+    flex: 1; /* Equal width for all video containers */
+    max-width: 50%; /* Each video container takes up to 50% of the width */    
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
     position: relative;
     padding-bottom: 56.25%; /* 16:9 aspect ratio */
     height: 0;
@@ -103,15 +113,6 @@ header {
     margin: 20px 0; /* Adjust margin as needed */
 }
 
-.video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
 .main_text {
 	margin-top: 50px;
 	margin-bottom: 50px;
@@ -119,9 +120,17 @@ header {
 	width: 700px;
 }
 
+.about_text {	
+	margin-bottom: 50px;
+	margin-left: 50px;
+	width: 1800px;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping of video containers */
+}
+
 .start_button {
 	margin-top: 20px;
-	display: inline;
+	display: inline-block;
 }
 
 .start {
@@ -156,12 +165,13 @@ img {
 
 .text-container {
     flex: 1;
-	max-width: 200px;
+	max-width: 300px;	
 }
 
 .image-container {
     flex: 1;
     text-align: center;
+	max-width: 300px;
 }
 
 .image-row {
@@ -203,7 +213,7 @@ img {
     padding: 20px; /* Add padding to create space between the text and the border */
     display: inline-block; /* Ensure the border wraps tightly around the content */
 	color: #0074FF;	
-	min-width: 200px;
+	width: 250px;
 }
 
 .outlined_answer {    
@@ -213,13 +223,14 @@ img {
     padding: 20px; /* Add padding to create space between the text and the border */
     display: inline-block; /* Ensure the border wraps tightly around the content */
 	color: white;	
+	width: 250px;
 }
 
 .percentage-bar {
     width: 100%;
     max-width: 400px; /* Adjust as needed */
     background-color: #D0D2D3;
-    border: 3px solid #D0D2D3; /* Outline color and thickness */
+    
     border-radius: 20px; /* Rounded corners */
     overflow: hidden; /* Ensures rounded corners clip the filled bar */
     position: relative;    
@@ -235,6 +246,15 @@ img {
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.score {
+	width: 400px;
+	padding-top: 200px;	
+}
+
+.pollAnswer {
+	margin-top: 20px;
 }
 
 .blue {
@@ -292,4 +312,15 @@ footer {
     .align-right {
         align-self: flex-end;
     }
+	
+	.video-container {
+        max-width: 100%; /* Each video container takes 100% width on small screens */
+    }
+
+	.ai_image {
+	width: 600px;
+	height: 600px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
 }
