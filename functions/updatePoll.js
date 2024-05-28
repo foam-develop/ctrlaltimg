@@ -8,9 +8,10 @@ exports.handler = async (event, context) => {
             body: 'Method Not Allowed'
         };
     }
-
+	const pollDataPath = path.resolve(__dirname, '../data/polls.json');
+	
     try {
-        const pollDataPath = path.resolve(__dirname, '../data/polls.json');
+       
         const pollData = JSON.parse(fs.readFileSync(pollDataPath, 'utf8'));
         
         const newData = JSON.parse(event.body);
@@ -19,8 +20,8 @@ exports.handler = async (event, context) => {
             if (newData.hasOwnProperty(key)) {
                 pollData[key] = newData[key];
             }
-        }
-
+			
+	}
         fs.writeFileSync(pollDataPath, JSON.stringify(pollData, null, 2));
 
         return {
@@ -29,9 +30,10 @@ exports.handler = async (event, context) => {
         };
     } catch (error) {
         return {
-            statusCode: 500,
+            statusCode: 500,	
+	
             //body: JSON.stringify({ error: 'Failed to update poll data' }),
-			body: JSON.stringify({ error: pollDataPath }),
+		body: JSON.stringify({ error: pollDataPath }),
         };
     }
 };
