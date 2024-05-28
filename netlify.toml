@@ -1,2 +1,5 @@
 [functions]
   directory = "functions"
+  
+[context.production.environment]
+  POLL_DATA_PATH = "data/data.json"
