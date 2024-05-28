@@ -30,7 +30,8 @@ exports.handler = async (event, context) => {
     } catch (error) {
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: 'Failed to update poll data' }),
+            //body: JSON.stringify({ error: 'Failed to update poll data' }),
+			body: JSON.stringify({ error: pollDataPath }),
         };
     }
 };
