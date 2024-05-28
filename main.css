@@ -5,6 +5,15 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'NewEdge666-RegularRounded';
+    src: url('fonts/NewEdge666-RegularRounded.woff2') format('woff2'),         
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -112,10 +121,15 @@ header {
 
 .start_button {
 	margin-top: 20px;
+	display: inline;
 }
 
 .start {
 	width: 100px;
+}
+
+.light_rounded {
+	font-family: 'NewEdge666-UltraLightRounded', sans-serif;
 }
 
 main {
@@ -157,9 +171,10 @@ img {
     gap: 10px;
 }
 
-.main-text {
+.main-text {		
 	margin-top: 50px;
 	margin-bottom: 50px;
+	text-align: center;	
 }
 
 #next_container {
