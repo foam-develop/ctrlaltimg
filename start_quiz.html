@@ -167,10 +167,11 @@
 				
 				
 				
-				newhtml = "<div class='main_text_quiz'><img class='score' src='images/your_score.png'><p class='score_card'>"+score+"/4</p><img class='score2' src='images/thanks_visit_booth.png'></div>";				
+				newhtml = "<div class='main_text_quiz'><img class='score' src='images/your_score.png'><p class='score_card'>"+score+"/4</p><img class='score2' src='images/thanks_visit_booth.png'><a href='video.html'><img src='buttons/next_button_blue.png' id='next' class='next_button_quiz'></a></div>";				
 				html.innerHTML = newhtml;
 				next = document.getElementById("next_container");		
-				next.innerHTML = '<a href="video.html"><img src="buttons/next_button_blue.png" id="next" class="next_button_quiz"></a>';
+				next.remove();
+				//next.innerHTML = '<a href="video.html"><img src="buttons/next_button_blue.png" id="next" class="next_button_quiz"></a>';
 					
 				
 				updatePoll();
