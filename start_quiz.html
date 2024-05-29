@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>ctrl.alt.img</title>
-	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="main.css">
 
     <script src="quiz.js"></script>
@@ -114,10 +114,10 @@
 			quizStep = quizStep + 1;
 			
 			if (correct){				
-				newhtml = "<p class='blue main-text'><b>You're right!</b></p><p class='image-row'><img class='ai_image' src='quiz_images/"+quizLogic[quizStep-1].image+"'></p><p class='outlined_answer'>"+quizLogic[quizStep-1].options[quizLogic[quizStep-1].correctAnswer]+"</p>";
+				newhtml = "<p class='blue main-text'><b>You're right!</b></p><p class='image-row'><img class='ai_image' src='quiz_images/"+quizLogic[quizStep-1].image+"'></p><p class='outlined_answer lifted'>"+quizLogic[quizStep-1].options[quizLogic[quizStep-1].correctAnswer]+"</p>";
 			}
 			else {
-				newhtml = "<p class='blue main-text'><b>Bummer<br />The correct answer was...</b></p><p class='image-row'><img class='ai_image' src='quiz_images/"+quizLogic[quizStep-1].image+"'></p><p class='outlined_answer'>"+quizLogic[quizStep-1].options[quizLogic[quizStep-1].correctAnswer]+"</p>";			
+				newhtml = "<p class='blue main-text'><b>Bummer<br />The correct answer was...</b></p><p class='image-row'><img class='ai_image' src='quiz_images/"+quizLogic[quizStep-1].image+"'></p><p class='outlined_answer lifted'>"+quizLogic[quizStep-1].options[quizLogic[quizStep-1].correctAnswer]+"</p>";			
 			}
 			html.innerHTML = newhtml;
 			next = document.getElementById("next_container");
@@ -142,7 +142,7 @@
 			console.log(perc_0);
 			
 			//newhtml = "<p class='blue main-text'>See what others think...</p><div class='content-wrapper'><div class='text-container'><p class='outlined'>"+option_0+":"+polls_answers[quizStep][0]+"</p><p class='outlined'>"+option_1+":"+polls_answers[quizStep][1]+"</p><p class='outlined'>"+option_2+":"+polls_answers[quizStep][2]+"</p></div></div>";
-			newhtml = "<p class='blue main-text'><b>See what others think...</b></p><div class='content-wrapper'><div class='text-container'><div class='percentage-bar'><div class='filled-bar' style='width: "+perc_0+"%;'><p class='pollAnswer'>"+option_0+" "+perc_0+"%</p></div></div><div class='percentage-bar'><p class='pollAnswer'>"+option_1+" "+perc_1+"%</p><div class='filled-bar' style='width: "+perc_1+"%;'></div></div><div class='percentage-bar'><p class='pollAnswer'>"+option_2+" "+perc_2+"%</p><div class='filled-bar' style='width: "+perc_2+"%;'></div></div></div></div>";			    
+			newhtml = "<p class='blue main-text'><b>See what others think...</b></p><div class='content-wrapper'><div class='text-container'><div class='percentage-bar'><p class='pollAnswer'>"+option_0+" "+perc_0+"%</p><div class='filled-bar' style='width: "+perc_0+"%;'></div></div><div class='percentage-bar'><p class='pollAnswer'>"+option_1+" "+perc_1+"%</p><div class='filled-bar' style='width: "+perc_1+"%;'></div></div><div class='percentage-bar'><p class='pollAnswer'>"+option_2+" "+perc_2+"%</p><div class='filled-bar' style='width: "+perc_2+"%;'></div></div></div></div>";			    
 			
 			html.innerHTML = newhtml;
 			next = document.getElementById("next_container");			
@@ -155,16 +155,24 @@
 			if (quizStep == 7){
 				html = document.getElementById("container");				
 				main = document.getElementById("main");				
+				
+				foot = document.getElementById("footer_cont");
+				foot.remove();
+				
+				
 				main.style.backgroundImage = "url('images/thanks_background.png')";
 				main.style.backgroundRepeat = "no-repeat";
 				main.style.backgroundPosition = "center center";
 				main.style.backgroundSize = "cover";
 				
 				
-				newhtml = "<div class='main_text'><img class='score' src='images/your_score.png'><p>"+score+"/4</p><img width=400px src='images/thanks_visit_booth.png'></div>";				
+				
+				newhtml = "<div class='main_text_quiz'><img class='score' src='images/your_score.png'><p class='score_card'>"+score+"/4</p><img class='score2' src='images/thanks_visit_booth.png'></div>";				
 				html.innerHTML = newhtml;
 				next = document.getElementById("next_container");		
-				next.innerHTML = '<a href="video.html"><img src="buttons/next_button_blue.png" id="next" class="next_button"></a>';
+				next.innerHTML = '<a href="video.html"><img src="buttons/next_button_blue.png" id="next" class="next_button_quiz"></a>';
+					
+				
 				updatePoll();
 				return;				
 			}			
@@ -238,7 +246,7 @@
     
 </main>
 
-<footer>
+<footer id="footer_cont">
 	<div class="footer"></div>
 	<div class="align-right"><img class="logo" src="logo/foam_affectlab.png"></div>
 </footer>

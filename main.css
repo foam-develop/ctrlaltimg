@@ -1,24 +1,23 @@
 @font-face {
     font-family: 'NewEdge666-Regular';
-    src: url('fonts/NewEdge666-Regular.woff2') format('woff2'),         
+    src: url('fonts/NewEdge666-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'NewEdge666-RegularRounded';
-    src: url('fonts/NewEdge666-RegularRounded.woff2') format('woff2'),         
+    src: url('fonts/NewEdge666-RegularRounded.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'NewEdge666-UltraLightRounded';
-    src: url('fonts/NewEdge666-UltraLightRounded.woff2') format('woff2'),         
+    src: url('fonts/NewEdge666-UltraLightRounded.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
-
 
 * {
     box-sizing: border-box;
@@ -28,121 +27,111 @@
 
 html {
     font-family: 'NewEdge666-UltraLightRounded', sans-serif;
-	font-size: 17px;
+    font-size: 17px;
 }
 
 header {
-	background-color: #0074FF;
-	display: flex;
+    background-color: #0074FF;
+    display: flex;
     align-items: center;
 }
 
 .header {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 30px;
-	padding-right: 10px;	
-	width: 100%;
+    padding: 10px 30px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;	
-	box-sizing: border-box;
-}
-
-.menu-items {    
-	display: flex;
     align-items: center;
-    flex-grow: 1;	
+    box-sizing: border-box;
 }
 
-.align-right {    
-	display: flex;
+.menu-items {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.align-right {
+    display: flex;
     align-items: center;
 }
 
 .menu {
-	width: 100px;
-	padding-right: 20px;
+    width: 100px;
+    padding-right: 20px;
 }
 
 .home_header {
-	background: url('images/header_back.png') no-repeat center center;
+    background: url('images/header_back.png') no-repeat center center;
     background-size: cover;
     height: 270px;
-	
 }
 
 .ready_to_go {
-	margin-top: 50px;
-	margin-bottom: 50px;
-	margin-left: 50px;
-	background: url('images/are_you_ready.png') no-repeat center center;
+    margin: 50px 0 50px 50px;
+    background: url('images/are_you_ready.png') no-repeat center center;
     background-size: cover;
     height: 140px;
-	width: 570px;
-}
-
-.about {
-	margin-top: 50px;
-	margin-bottom: 20px;	
-	background: url('buttons/about.png') no-repeat center center;
-    background-size: cover;
-    height: 40px;
-	width: 130px;
+    width: 570px;
 }
 
 .video {
-	margin-top: 50px;
-	margin-bottom: 20px;	
-	background: url('buttons/videos.png') no-repeat center center;
-    background-size: cover;
-    height: 50px;
-	width: 140px;
+    margin: 50px 0 20px;
+    background: url('buttons/videos.png') no-repeat center center;
+	background-size: cover;
+    height: 40px;
+    width: 130px;	
+}
+.about {
+	margin: 50px 0 20px;
+    background: url('buttons/about.png') no-repeat center center;
+	background-size: cover;
+    height: 40px;
+    width: 130px;	
 }
 
 .video-container {
-    flex: 1; /* Equal width for all video containers */
-    max-width: 50%; /* Each video container takes up to 50% of the width */    
-    box-sizing: border-box; /* Ensure padding and border are included in the width */
+    /*flex: 1;
+    max-width: 50%;
+    box-sizing: border-box;
     position: relative;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    padding-bottom: 56.25%;
     height: 0;
-    overflow: hidden;
-    max-width: 100%;
+    overflow: hidden;*/
     background: #000;
-    margin: 20px 0; /* Adjust margin as needed */
+    margin: 20px 0;
+}
+
+.score_card {
+	margin-left: -800px;
+	margin-top: -35px;
+	font-size: 20px;
 }
 
 .main_text {
-	margin-top: 50px;
-	margin-bottom: 50px;
-	margin-left: 50px;
-	width: 700px;
+    margin: 50px 0 50px 50px;
+    width: 700px;
 }
 
-.about_text {	
-	margin-bottom: 50px;
-	margin-left: 50px;
-	width: 1800px;
+.about_text {
+    margin-bottom: 50px;
+    margin-left: 50px;
+    width: 1800px;
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping of video containers */
+    flex-wrap: wrap;
 }
 
 .start_button {
-	margin-top: 20px;
-	display: inline-block;
-}
-
-.start {
-	width: 100px;
+    margin-top: 20px;
+    display: inline-block;
 }
 
 .light_rounded {
-	font-family: 'NewEdge666-UltraLightRounded', sans-serif;
+    font-family: 'NewEdge666-UltraLightRounded', sans-serif;
 }
 
 main {
-	min-height: 600px;
+    min-height: 600px;
 }
 
 img {
@@ -160,18 +149,13 @@ img {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 20px; /* Adjust spacing between the divs as needed */
+    gap: 20px;
 }
 
-.text-container {
+.text-container, .image-container {
     flex: 1;
-	max-width: 300px;	
-}
-
-.image-container {
-    flex: 1;
+    max-width: 300px;
     text-align: center;
-	max-width: 300px;
 }
 
 .image-row {
@@ -181,110 +165,126 @@ img {
     gap: 10px;
 }
 
-.main-text {		
-	margin-top: 50px;
-	margin-bottom: 50px;
-	text-align: center;	
-}
-
-#next_container {
-	margin-top: 30px;
+.main-text {
+    margin: 50px 0;
     text-align: center;
 }
 
-.next_button {
-    cursor: pointer;
-	width: 100px;
+#next_container {
+    margin-top: 30px;
+    text-align: center;
+	margin-bottom: 30px;
 }
 
+.next_button {
+    margin-top: 0;
+	cursor: pointer;
+    width: 100px;
+}
 
+.next_button_quiz {
+    cursor: pointer;
+    width: 100px;
+	padding-bottom: 50px;
+}
 
 .ai_image {
-	width: 300px;
-	height: 300px;
-	margin-left: 10px;
-	margin-right: 10px;
+    width: 300px;
+    height: 300px;
+    margin: 10px;
 }
 
-.outlined {    
-	margin-bottom: 25px;
-	border: 3px solid #0074FF; /* Change color and thickness as needed */
-    border-radius: 20px; /* Adjust the radius to achieve the desired roundness */
-    padding: 20px; /* Add padding to create space between the text and the border */
-    display: inline-block; /* Ensure the border wraps tightly around the content */
-	color: #0074FF;	
-	width: 250px;
+.outlined {
+    margin-bottom: 25px;
+    border: 3px solid #0074FF;
+    border-radius: 20px;
+    padding: 20px;
+    display: inline-block;
+    color: #0074FF;
+    width: 250px;
 }
 
-.outlined_answer {    
-	border: 3px solid #0074FF; /* Change color and thickness as needed */
-    border-radius: 20px; /* Adjust the radius to achieve the desired roundness */
-	background-color: #0074FF;
-    padding: 20px; /* Add padding to create space between the text and the border */
-    display: inline-block; /* Ensure the border wraps tightly around the content */
-	color: white;	
-	width: 250px;
+.outlined_answer {
+    border: 3px solid #0074FF;
+    border-radius: 20px;
+    background-color: #0074FF;
+    padding: 20px;
+    display: inline-block;
+    color: white;
+    width: 250px;
+}
+
+.lifted {
+	margin-top: -50px;
 }
 
 .percentage-bar {
-    width: 100%;
-    max-width: 400px; /* Adjust as needed */
-    background-color: #D0D2D3;
-    
-    border-radius: 20px; /* Rounded corners */
-    overflow: hidden; /* Ensures rounded corners clip the filled bar */
-    position: relative;    
-    margin: 10px 0; /* Vertical spacing */
-	min-width: 200px;
-	min-height: 64px;
+  width: 100%;
+  max-width: 400px; /* Adjust as needed */
+  background-color: #D0D2D3;
+  border-radius: 20px; /* Rounded corners */
+  overflow: hidden; /* Ensures rounded corners clip the filled bar */
+  position: relative; /* Establish positioning context */
+  margin: 10px 0; /* Vertical spacing */
+  min-width: 200px;
+  min-height: 64px;
+  text-align: center; /* Center the text */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .filled-bar {
-    height: 100%;
-    background-color: #0074FF; /* Filled bar color */
-    border-radius: 10px 0 0 10px; /* Rounded corners for the filled part */
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.score {
-	width: 400px;
-	padding-top: 200px;	
+  height: 100%;
+  background-color: #0074FF; /* Filled bar color */
+  border-radius: 20px 0 0 20px; /* Rounded corners for the filled part */
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .pollAnswer {
-	margin-top: 20px;
+  position: relative; /* Position text within the container */
+  z-index: 1; /* Ensure text appears above the filled bar */  
+}
+
+.score {
+    width: 300px;
+    padding-top: 200px;
+	margin-left: 100px;
+}
+
+.score2 {
+    width: 300px;
+	padding-top: 40px;
+	margin-left: 100px;
 }
 
 .blue {
-	color: #0074FF;
+    color: #0074FF;
 }
 
 .grey {
-	color: #D0D2D3;
+    color: #D0D2D3;
 }
 
 .logo {
-	width: 200px;	
+    width: 200px;
 }
 
-footer {	
-	display: flex;
+footer {
+    display: flex;
     align-items: center;
-	padding-right: 20px;
+    padding-right: 20px;
 }
 
 .footer {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 30px;
-	padding-right: 10px;	
-	width: 100%;
+    padding: 10px 30px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;	
-	box-sizing: border-box;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 /* Mobile Styles */
@@ -292,11 +292,34 @@ footer {
     header {
         height: auto;
         padding: 10px;
+		max-width: auto;
     }
 
     .header {
         flex-direction: column;
         align-items: flex-start;
+    }
+	
+	.home_header {
+		background: url('images/header_back_mobile.png') no-repeat center center;
+		background-size: cover;
+		height: 270px;
+		
+	}
+	
+	.ready_to_go {
+		margin: 0;
+		height: 70px;
+		width: 285px;
+	}
+	
+	.main_text_quiz {
+		margin-top: 0;
+		margin-left: 
+	}
+
+    footer {
+        background-color: grey;
     }
 
     .menu-items {
@@ -310,17 +333,21 @@ footer {
     }
 
     .align-right {
-        align-self: flex-end;
-    }
-	
-	.video-container {
-        max-width: 100%; /* Each video container takes 100% width on small screens */
+        align-self: center;
     }
 
-	.ai_image {
-	width: 600px;
-	height: 600px;
-	margin-left: 10px;
-	margin-right: 10px;
-}
+    .video-container {
+        max-width: 100%;
+    }
+
+    .ai_image {
+        width: 25%;
+        height: 25%;
+        margin: 10px;
+    }
+
+    .start_button {
+        display: inline-block;
+        margin: 20px auto;
+    }
 }
