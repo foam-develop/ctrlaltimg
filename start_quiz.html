@@ -38,7 +38,9 @@
             });
 	
         var quizStep = 0;
-		var score = 0;		
+		var score = 0;	
+		var progress = 0;
+		var open_answers = {};
 
         
 		function updatePoll() {
@@ -100,11 +102,23 @@
 			});
 		}
 		
+		function saveInput(){			
+			if (document.getElementById('input_field').value != ""){				
+				open_answers[quizStep] = document.getElementById('input_field').value;
+				quizStep = quizStep + 1;
+				render(quizLogic[quizStep]);
+			}
+			else {
+				alert("Input something please");
+			}			
+		};
+		
 		function executeStep(){			
             render(quizLogic[quizStep]);
         };
 		
-		function answer(reply){	
+		function answer(reply){
+			progress = progress + 1;
 			var correct = false;
 			html = document.getElementById("container");
 			if (reply == quizLogic[quizStep].correctAnswer){
@@ -121,11 +135,14 @@
 			}
 			html.innerHTML = newhtml;
 			next = document.getElementById("next_container");
-			next.innerHTML = '<img src="buttons/next_button.png" id="next" class="next_button" onclick="executeStep();">';
-			console.log("Score:"+score);			
+			//next.innerHTML = '<img src="buttons/next_button.png" id="next" class="next_button" onclick="executeStep();">';
+			//console.log("Score:"+score);			
+			next_container = document.getElementById("next_container");				
+			next_container.innerHTML = '<div id="next_container"><div class="circle">'+progress+'/14</div><div class="variable_div"><img src="images/'+progress+'.png" alt="Dynamic Image" class="variable_image"></div><img src="buttons/next_button.png" id="next" class="next_button" onclick="executeStep();"></div>';
 		};
 		
-		function answer_poll(reply){	
+		function answer_poll(reply){
+			progress = progress + 1;
 			html = document.getElementById("container");			
 			polls_answers[quizStep][reply] = polls_answers[quizStep][reply]+1;			
 			
@@ -138,15 +155,16 @@
 			total = polls_answers[quizStep][0]+polls_answers[quizStep][1]+polls_answers[quizStep][2];
 			perc_0 = Math.round(polls_answers[quizStep][0]/total * 100);
 			perc_1 = Math.round(polls_answers[quizStep][1]/total * 100);
-			perc_2 = Math.round(polls_answers[quizStep][2]/total * 100);
-			console.log(perc_0);
+			perc_2 = Math.round(polls_answers[quizStep][2]/total * 100);			
 			
 			//newhtml = "<p class='blue main-text'>See what others think...</p><div class='content-wrapper'><div class='text-container'><p class='outlined'>"+option_0+":"+polls_answers[quizStep][0]+"</p><p class='outlined'>"+option_1+":"+polls_answers[quizStep][1]+"</p><p class='outlined'>"+option_2+":"+polls_answers[quizStep][2]+"</p></div></div>";
 			newhtml = "<p class='blue main-text'><b>See what others think...</b></p><div class='content-wrapper'><div class='text-container'><div class='percentage-bar'><p class='pollAnswer'>"+option_0+" "+perc_0+"%</p><div class='filled-bar' style='width: "+perc_0+"%;'></div></div><div class='percentage-bar'><p class='pollAnswer'>"+option_1+" "+perc_1+"%</p><div class='filled-bar' style='width: "+perc_1+"%;'></div></div><div class='percentage-bar'><p class='pollAnswer'>"+option_2+" "+perc_2+"%</p><div class='filled-bar' style='width: "+perc_2+"%;'></div></div></div></div>";			    
 			
 			html.innerHTML = newhtml;
-			next = document.getElementById("next_container");			
-			next.innerHTML = '<img src="buttons/next_button.png" id="next" class="next_button" onclick="executeStep();">';
+			//next = document.getElementById("next_container");			
+			//next.innerHTML = '<img src="buttons/next_button.png" id="next" class="next_button" onclick="executeStep();">';
+			next_container = document.getElementById("next_container");				
+			next_container.innerHTML = '<div id="next_container"><div class="circle">'+progress+'/14</div><div class="variable_div"><img src="images/'+progress+'.png" alt="Dynamic Image" class="variable_image"></div><img src="buttons/next_button.png" id="next" class="next_button" onclick="executeStep();"></div>';
 			quizStep = quizStep + 1;				
 		};
 
@@ -175,9 +193,11 @@
 					
 				
 				updatePoll();
+				console.log(open_answers);
 				return;				
 			}			
-            if (step.element == 'quiz'){                
+            if (step.element == 'quiz'){
+				progress = progress + 1;
 				html = document.getElementById("container");
                 title = step.question;
 				
@@ -188,10 +208,13 @@
 				image = step.image;
                 newhtml = "<p class='blue main-text'><b>"+title+"</b></p><div class='content-wrapper'><div class='text-container'><p class='outlined' onclick='answer(0);'>"+option_0+"<br /></p><p class='outlined' onclick='answer(1);'>"+option_1+"<br /></p><p class='outlined' onclick='answer(2);'>"+option_2+"<br /></p></div><div class='image-container>'<p><img class='ai_image' src='quiz_images/"+step.image+"'></p></div></div>";
                 html.innerHTML = newhtml;
-				next = document.getElementById("next");
-				next.remove();
+				next_container = document.getElementById("next_container");				
+				next_container.innerHTML = '<div id="next_container"><div class="circle">'+progress+'/14</div><div class="variable_div"><img src="images/'+progress+'.png" alt="Dynamic Image" class="variable_image"></div><div class="placeholder"></div>';
+				//next = document.getElementById("next");
+				//next.remove();
             }
             if (step.element == 'poll'){
+				progress = progress + 1;
 				html = document.getElementById("container");
                 title = step.question;
 				
@@ -200,10 +223,15 @@
                 option_2 = step.options[2];
                 
 				image = step.image;
-                newhtml = "<p class='blue main-text'><b>"+title+"</b></p><div class='content-wrapper'><div class='text-container'><p class='outlined' onclick='answer_poll(0);'>"+option_0+"</p><p class='outlined' onclick='answer_poll(1);'>"+option_1+"</p><p class='outlined' onclick='answer_poll(2);'>"+option_2+"</p></div></div>";
-                html.innerHTML = newhtml;
-				next = document.getElementById("next");
-				next.remove();
+                newhtml = "<p class='blue main-text'><b>"+title+"</b></p><div class='content-wrapper'><div class='text-container'><p class='outlined' onclick='answer_poll(0);'>"+option_0+"</p><p class='outlined' onclick='answer_poll(1);'>"+option_1+"</p><p class='outlined' onclick='answer_poll(2);'>"+option_2+"</p><div class='input-container'><input id='input_field' type='text' class='custom-input' placeholder='[Tell us more]'></div></div></div>";
+				
+				html.innerHTML = newhtml;				
+				next_container = document.getElementById("next_container");				
+				//next_container.innerHTML = '<div id="next_container"><div class="circle">'+progress+'/14</div><div class="variable_div"><img src="images/'+progress+'.png" alt="Dynamic Image" class="variable_image"></div><img src="buttons/next_button.png" id="next" class="next_button" onclick="executeStep();"></div>';
+				next_container.innerHTML = '<div id="next_container"><div class="circle">'+progress+'/14</div><div class="variable_div"><img src="images/'+progress+'.png" alt="Dynamic Image" class="variable_image"></div><img src="buttons/next_button.png" id="next" class="next_button" onclick="saveInput();">';
+				
+				//next = document.getElementById("next");
+				//next.remove();
             }            
         };
 
@@ -241,7 +269,7 @@
 		
 		
 	</div>
-	<p id="next_container">
+	<div id="next_container">
 		<img src="buttons/next_button.png" id="next" class="next_button" onclick="executeStep();">
 	</p>
     

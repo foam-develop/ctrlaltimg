@@ -66,8 +66,6 @@ header {
     padding-right: 20px;
 }
 
-
-
 .home_header {
     background: url('images/header_back.png') no-repeat center center;
     background-size: cover;
@@ -139,7 +137,8 @@ iframe {
 }
 
 main {
-    min-height: 600px;
+    min-height: 900px;
+	/*height: auto;*/
 }
 
 img {
@@ -181,13 +180,73 @@ img {
 #next_container {
     margin-top: 30px;
     text-align: center;
-	margin-bottom: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Adjust as necessary */
+}
+
+.variable_div {
+    max-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.variable_image {
+    max-width: 100%; /* Ensures the image does not exceed the div's max-width */
+    height: 45px; /* Maintains the aspect ratio */
+    margin-top: 14px;
+}
+
+.circle {
+    width: 40px; /* Width of the circle */
+    height: 40px; /* Height of the circle */
+    background-color: #D0D2D3; /* Background color of the circle */
+    border-radius: 50%; /* Make the div a circle */
+    display: flex; /* Use flexbox to center the text */
+    align-items: center; /* Vertically center the text */
+    justify-content: center; /* Horizontally center the text */
+    font-size: 16px; /* Font size of the text */
+    text-align: center; /* Center align the text */    
+    margin-top: 20px;
+}
+
+.placeholder {
+	width: 100px;
+	height: auto;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Full width */
+}
+
+.custom-input {
+    width: 85%; /* 85% width */
+    border: none; /* Remove default border */
+    border-bottom: 2px solid #D0D2D3; /* Add grey line at the bottom */
+    padding: 10px 0; /* Add some padding for spacing */
+    font-size: 16px; /* Adjust font size */
+    outline: none; /* Remove outline on focus */
+    background-color: transparent; /* Ensure the background is transparent */
+    text-align: center; /* Center-align the text including placeholder */
+}
+
+.custom-input::placeholder {
+    color: #D0D2D3; /* Placeholder text color */
+    opacity: 1; /* Make sure the placeholder is fully visible */
+    text-align: center; /* Center-align the placeholder text */
 }
 
 .next_button {
-    margin-top: 0;
-	cursor: pointer;
+    cursor: pointer;
     width: 100px;
+    height: auto;
+    padding-top: 10px;    
 }
 
 .ai_image {
@@ -221,6 +280,10 @@ img {
     display: inline-block;
     color: white;
     width: 250px;
+    position: absolute; /* Position the text absolutely within the container */
+    
+    margin-left: 10px;
+    transform: translateX(-50%); /* Center the text horizontally */
 }
 
 .lifted {
@@ -293,6 +356,26 @@ img {
 	top: 600px;
 	left: 500px;
 }
+
+.circle_container {
+	width: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center; /* Horizontally center the circle */
+	justify-content: flex-end; /* Ensure the flex container uses all available height */
+	height: 300px; /* Make sure the container takes the full height */
+}
+
+.progress_image {
+	display: flex; /* Use flexbox to center the text */
+	align-items: center; /* Vertically center the text */
+	justify-content: center; /* Horizontally center the text */
+	font-size: 16px; /* Font size of the text */
+	text-align: center; /* Center align the text */
+	margin-top: 150px; /* Push the circle to the bottom */
+}
+
+
 
 .blue {
     color: #0074FF;
