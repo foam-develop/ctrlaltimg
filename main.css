@@ -1,21 +1,21 @@
 @font-face {
     font-family: 'NewEdge666-Regular';
     src: url('fonts/NewEdge666-Regular.woff2') format('woff2');
-    font-weight: normal;
+    font-weight: bolder;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'NewEdge666-RegularRounded';
     src: url('fonts/NewEdge666-RegularRounded.woff2') format('woff2');
-    font-weight: normal;
+    font-weight: bolder;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'NewEdge666-UltraLightRounded';
     src: url('fonts/NewEdge666-UltraLightRounded.woff2') format('woff2');
-    font-weight: normal;
+    font-weight: bolder;
     font-style: normal;
 }
 
@@ -27,7 +27,7 @@
 
 html {
     font-family: 'NewEdge666-UltraLightRounded', sans-serif;
-    font-size: 17px;
+    font-size: 18px;
 }
 
 header {
@@ -62,7 +62,7 @@ header {
 }
 
 .menu-base {
-    width: 100px;
+    width: 120px;
     padding-right: 20px;
 }
 

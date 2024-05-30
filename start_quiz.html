@@ -158,7 +158,7 @@
 			perc_2 = Math.round(polls_answers[quizStep][2]/total * 100);			
 			
 			//newhtml = "<p class='blue main-text'>See what others think...</p><div class='content-wrapper'><div class='text-container'><p class='outlined'>"+option_0+":"+polls_answers[quizStep][0]+"</p><p class='outlined'>"+option_1+":"+polls_answers[quizStep][1]+"</p><p class='outlined'>"+option_2+":"+polls_answers[quizStep][2]+"</p></div></div>";
-			newhtml = "<p class='blue main-text'><b>See what others think...</b></p><div class='content-wrapper'><div class='text-container'><div class='percentage-bar'><p class='pollAnswer'>"+option_0+" "+perc_0+"%</p><div class='filled-bar' style='width: "+perc_0+"%;'></div></div><div class='percentage-bar'><p class='pollAnswer'>"+option_1+" "+perc_1+"%</p><div class='filled-bar' style='width: "+perc_1+"%;'></div></div><div class='percentage-bar'><p class='pollAnswer'>"+option_2+" "+perc_2+"%</p><div class='filled-bar' style='width: "+perc_2+"%;'></div></div></div></div>";			    
+			newhtml = "<p class='blue main-text'><b>See what others think...</b></p><div class='content-wrapper'><div class='text-container'><div class='percentage-bar'><p class='pollAnswer'><b>"+option_0+" "+perc_0+"%</b></p><div class='filled-bar' style='width: "+perc_0+"%;'></div></div><div class='percentage-bar'><p class='pollAnswer'><b>"+option_1+" "+perc_1+"%</b></p><div class='filled-bar' style='width: "+perc_1+"%;'></div></div><div class='percentage-bar'><p class='pollAnswer'><b>"+option_2+" "+perc_2+"%</b></p><div class='filled-bar' style='width: "+perc_2+"%;'></div></div></div></div>";			    
 			
 			html.innerHTML = newhtml;
 			//next = document.getElementById("next_container");			
@@ -206,7 +206,7 @@
                 option_2 = step.options[2];
                 
 				image = step.image;
-                newhtml = "<p class='blue main-text'><b>"+title+"</b></p><div class='content-wrapper'><div class='text-container'><p class='outlined' onclick='answer(0);'>"+option_0+"<br /></p><p class='outlined' onclick='answer(1);'>"+option_1+"<br /></p><p class='outlined' onclick='answer(2);'>"+option_2+"<br /></p></div><div class='image-container>'<p><img class='ai_image' src='quiz_images/"+step.image+"'></p></div></div>";
+                newhtml = "<p class='blue main-text'><b>"+title+"</b></p><div class='content-wrapper'><div class='text-container'><p class='outlined' onclick='answer(0);'><b>"+option_0+"</b><br /></p><p class='outlined' onclick='answer(1);'><b>"+option_1+"</b><br /></p><p class='outlined' onclick='answer(2);'><b>"+option_2+"</b><br /></p></div><div class='image-container>'<p><img class='ai_image' src='quiz_images/"+step.image+"'></p></div></div>";
                 html.innerHTML = newhtml;
 				next_container = document.getElementById("next_container");				
 				next_container.innerHTML = '<div id="next_container"><div class="circle">'+progress+'/14</div><div class="variable_div"><img src="images/'+progress+'.png" alt="Dynamic Image" class="variable_image"></div><div class="placeholder"></div>';
@@ -223,7 +223,7 @@
                 option_2 = step.options[2];
                 
 				image = step.image;
-                newhtml = "<p class='blue main-text'><b>"+title+"</b></p><div class='content-wrapper'><div class='text-container'><p class='outlined' onclick='answer_poll(0);'>"+option_0+"</p><p class='outlined' onclick='answer_poll(1);'>"+option_1+"</p><p class='outlined' onclick='answer_poll(2);'>"+option_2+"</p><div class='input-container'><input id='input_field' type='text' class='custom-input' placeholder='[Tell us more]'></div></div></div>";
+                newhtml = "<p class='blue main-text'><b>"+title+"</b></p><div class='content-wrapper'><div class='text-container'><p class='outlined' onclick='answer_poll(0);'><b>"+option_0+"</b></p><p class='outlined' onclick='answer_poll(1);'><b>"+option_1+"</b></p><p class='outlined' onclick='answer_poll(2);'><b>"+option_2+"</b></p><div class='input-container'><input id='input_field' type='text' class='custom-input' placeholder='[Tell us more]'></div></div></div>";
 				
 				html.innerHTML = newhtml;				
 				next_container = document.getElementById("next_container");				
@@ -265,7 +265,7 @@
 			<img class="ai_image_main" src="quiz_images/3.png">
 			<img class="ai_image_main" src="quiz_images/4.png">
 		</p>
-		<p class="blue main-text"><b>Can you guess the prompt?</b></p>
+		<p class="blue main-text"><b>Can you guess the prompts?</b></p>
 		
 		
 	</div>
@@ -277,7 +277,7 @@
 
 <footer id="footer_cont">
 	<div class="footer"></div>
-	<div class="align-right"><img class="logo" src="logo/foam_affectlab.png"></div>
+	<div class="align-right"><a href="http://www.affectlab.org"><img width="200px" src="logo/foam_affectlab.png"></a></div>
 </footer>
 
 
