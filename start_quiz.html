@@ -102,6 +102,57 @@
 			});
 		}
 		
+		function updateOA() {
+			let jsonString = JSON.stringify(open_answers);
+			let encodedString = btoa(jsonString);			
+			let secret = 'JDZ7RHqdH*7E2u';			
+			let secretBuffer = new TextEncoder().encode(secret);		
+			let dataBuffer = new TextEncoder().encode(jsonString);
+
+			// Calculate HMAC digest
+			crypto.subtle.importKey(
+				'raw',
+				secretBuffer,
+				{name: 'HMAC', hash: {name: 'SHA-256'}},
+				false,
+				['sign']
+			).then(key => {
+				crypto.subtle.sign(
+					'HMAC',
+					key,
+					dataBuffer
+				).then(signature => {
+					let digest = Array.from(new Uint8Array(signature)).map(byte => {
+						return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+					}).join('');
+
+					// Send the data
+					fetch('https://ctrlaltimg.affectlab.org/share_image/open_answers', {
+						method: 'POST',
+						body: new URLSearchParams({
+							digest: digest,
+							encoded_string: jsonString
+						}),
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded'
+						}
+					})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Network response was not ok ' + response.statusText);
+						}
+						return response.text();
+					})
+					.then(data => {
+						console.log('Response:', data);
+					})
+					.catch(error => {
+						console.error('Error:', error);
+					});
+				});
+			});
+		}
+		
 		function saveInput(){			
 			if (document.getElementById('input_field').value != ""){				
 				open_answers[quizStep] = document.getElementById('input_field').value;
@@ -193,7 +244,7 @@
 					
 				
 				updatePoll();
-				console.log(open_answers);
+				updateOA();			
 				return;				
 			}			
             if (step.element == 'quiz'){
